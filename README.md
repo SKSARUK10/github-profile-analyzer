@@ -2,6 +2,29 @@
 
 A production-ready backend service built with **Node.js + Express + MySQL** that analyzes GitHub user profiles, computes rich developer insights, and stores them for fast retrieval.
 
+🔗 **Live API**: https://github-profile-analyzer-v0dj.onrender.com
+📦 **GitHub Repo**: https://github.com/SKSARUK10/github-profile-analyzer
+
+> ⚠️ Hosted on Render's free tier — if the service has been idle, the first request may take 30-60 seconds while it wakes up. Subsequent requests are fast.
+
+---
+
+## ⚡ Quick Test (Live API)
+
+```bash
+# Health check
+curl https://github-profile-analyzer-v0dj.onrender.com/health
+
+# Analyze a GitHub profile (fetches + stores in MySQL)
+curl -X POST https://github-profile-analyzer-v0dj.onrender.com/api/profiles/analyze/torvalds
+
+# List all analyzed profiles
+curl https://github-profile-analyzer-v0dj.onrender.com/api/profiles
+
+# Get a single profile
+curl https://github-profile-analyzer-v0dj.onrender.com/api/profiles/torvalds
+```
+
 ---
 
 ## 🚀 Features
@@ -39,7 +62,7 @@ A production-ready backend service built with **Node.js + Express + MySQL** that
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/github-profile-analyzer.git
+git clone https://github.com/SKSARUK10/github-profile-analyzer.git
 cd github-profile-analyzer
 ```
 
@@ -251,15 +274,22 @@ github-profile-analyzer/
 
 ## 🌐 Live Deployment
 
-> **Live API:** `https://your-deployed-url.com`  
-> *(Update this after deploying to Railway / Render / EC2)*
+**Live API Base URL**: https://github-profile-analyzer-v0dj.onrender.com
+**GitHub Repository**: https://github.com/SKSARUK10/github-profile-analyzer
 
-### Recommended free deployment: [Railway](https://railway.app)
-1. Push to GitHub
-2. Connect Railway to your repo
-3. Add a MySQL plugin in Railway
-4. Set environment variables from `.env.example`
-5. Deploy 🎉
+### Deployment stack used
+- **Backend hosting**: [Render](https://render.com) — free web service, auto-deploys from GitHub on push
+- **Database**: [Aiven](https://aiven.io) — free-tier managed MySQL (SSL-enabled connection)
+
+### Deploying this project yourself
+1. Push the repo to GitHub
+2. Create a free MySQL service on [Aiven](https://aiven.io) and note the host/port/user/password/database
+3. Run `sql/schema.sql` against that database (or `npm run migrate` once env vars are set)
+4. Create a new **Web Service** on [Render](https://render.com), connect your GitHub repo
+5. Set build command: `npm install`, start command: `npm start`
+6. Add environment variables in Render's dashboard (see `.env.example`):
+   - `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, `DB_SSL=true`, `GITHUB_TOKEN`, `NODE_ENV=production`
+7. Deploy 🎉
 
 ---
 
