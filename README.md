@@ -275,7 +275,7 @@ github-profile-analyzer/
 ## 🌐 Live Deployment
 
 **Live API Base URL**: https://github-profile-analyzer-v0dj.onrender.com
-**GitHub Repository**: https://github.com/SKSARUK10/github-profile-analyzer
+
 
 ### Deployment stack used
 - **Backend hosting**: [Render](https://render.com) — free web service, auto-deploys from GitHub on push
